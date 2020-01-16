@@ -1,0 +1,112 @@
+<html>
+<body>  
+<style>
+input{
+	height:40px;
+	border-radius:7px;
+}
+
+.bg-image{
+position: fixed;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  
+  filter: blur(10px);
+  background-image: url('student.png');
+  background-position: center;
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+</style>
+<div class="bg-image"></div>
+	<div style="width:100%;height:100%">
+	<div style="left:0;width:35%;height:50%;position:absolute">
+		<h1 style="text-align:center;border:1px solid black;">Add Products</h1>
+		Product Name:<input type="text" id="pName" placeholder="Enter product name"></br></br>
+		Product Image:<input type="file" id="pImage" accept=".png, .jpg, .jpeg"></br>
+		Product Description:<input type="text" id="pDescription" placeholder="Enter product description" height="30px"></br></br>
+		Product Quantity:<input type="number" id="pQuantity" placeholder="Enter product quantity" height="30px"></br></br>
+		Product Price:<input type="number" id="pPrice" placeholder="Enter product price" height="30px"></br></br>
+		<button onclick="addProduct()" style="background-color:green;color:white;height:30px">Add Product</button>
+	</br></div> 
+  
+	
+	<div id="pList" style="right:0;width:65%;height:100px;position:absolute">
+		<h1 style="text-align:center;border:1px solid black;">Product List</h1>
+		
+	</div>
+	
+	
+	<div id="cartList" style="bottom:0;position:absolute;left:0;width:35%;height:50%">
+		<h1 style="text-align:center;border:1px solid black;">Cart</h1>
+		
+		
+<script>
+
+		function addCart(){
+			var div=document.createElement("p");
+			div.innerHTML="bckasdjcblsadbcl";
+			document.getElementById("cartList").appendChild(div);
+		}	
+function addProduct(){
+let files = document.getElementById("pImage").files;
+    if (files && files.length) {
+	var fr = new FileReader();
+	fr.onload=function(){
+        var img = document.createElement("img");
+		img.src=fr.result;
+			var container=document.createElement("div");container.style="display:flex;border-bottom:1px solid black";
+			var div=document.createElement("div");div.appendChild(img);div.style="width:30%;height:15%";
+			var div2=document.createElement("div");div2.style="width:50%;height:15%";
+			var div3 = document.createElement("div");div3.style="width:25%;height:15%";
+			var name = document.createElement("h3");name.setAttribute("id",name);
+            var description = document.createElement("h3");description.setAttribute("id",description);
+            var quantity = document.createElement("h3");quantity.setAttribute("id",quantity); 
+            var price = document.createElement("h3");price.setAttribute("id",price);
+			var btn=document.createElement('button'); btn.setAttribute("id",btn);btn.onclick=addCart;
+			
+			name.innerHTML="Product Name : "+document.getElementById("pName").value;
+			div2.appendChild(name);
+            
+			description.innerHTML="Price Description : "+document.getElementById("pDescription").value;
+			div2.appendChild(description);
+            
+			price.innerHTML="Product Price : "+document.getElementById("pPrice").value;
+			div2.appendChild(quantity);
+            
+			quantity.innerHTML="Product Quantity : "+document.getElementById("pQuantity").value;
+			div2.appendChild(price);
+            
+			btn.innerHTML="Add to Cart";btn.style="background-color:blue;color:white;height:30px";div3.appendChild(btn);
+			
+			container.appendChild(div);
+			container.appendChild(div2);
+			container.appendChild(div3);
+			document.getElementById("pList").appendChild(container);
+			
+			document.getElementById("pName").value = "";
+            document.getElementById("pImage").value = "";
+            document.getElementById("pDescription").value = "";
+            document.getElementById("pQuantity").value = "";
+            document.getElementById("pPrice").value = "";
+			
+}
+
+        fr.readAsDataURL(files[0]);
+}
+}
+
+			
+</script>
+		
+		Cart Total:<h3 id="cartTotal"></h3>
+	</div>
+	</div>
+
+</body>
+</html>
