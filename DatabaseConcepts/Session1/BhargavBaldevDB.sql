@@ -1,8 +1,8 @@
---create DATABASE 
+--//create DATABASE 
 --CREATE DATABASE BhargavBaldevDB;
 
 
---create table
+--//create table
 --CREATE TABLE Individual (IndividualId int,FirstName Varchar(255),LastName Varchar(255),UserName Char(10));
 
 --//insert records
