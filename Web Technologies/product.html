@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+body{color:white}
+
+.bg-image{
+position: fixed;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: blur(10px);
+  background-image: url('student.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.round{
+border-radius:10px;
+}
+
+.addProduct-bgimg{
+background-image: url('blackBackground.png');
+}
+
+    .fit_image{
+
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+</style>
+<body>
+<div class="bg-image"></div>
+    <div class="container-fluid">
+        <div class="row ">
+        <div class="col-md-4">
+            <div class="py-3 round shadow-lg p-3 mb-5 addProduct-bgimg p-3 mt-3">
+                <h3 class="text-center" style="background-image:linear-gradient(red,yellow);color:black;"><i>Add Product</i></h3>
+                    <div class="form-group">
+                      <label>Product Name : </label>
+                      <input type="text" class="form-control" id="pName" placeholder="Enter Product Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image : </label>
+                        <input type="file" class="form-control" id="Image" accept=".png, .jpg, .jpeg">
+                    </div>
+					<div class="form-group">
+                      <label> Product Description : </label>
+                      <input type="text" class="form-control" id="productDescription" placeholder="Enter Product Description">
+                    </div>
+                    
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Product Quantity :</label>
+                        <input type="number" class="form-control" id="Quantity" placeholder="Enter Product Quantity">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Product Price :</label>
+                        <input type="number" class="form-control" id="Price" placeholder="Enter Product Price">
+                    </div>
+                    </div>
+					<center>
+                    <button onclick="addproduct()" class="btn btn-primary" style="align:center">Add Product</button>
+					</center>
+            </div>
+            <div class="round shadow-lg p-3 mb-5 addProduct-bgimg" id = "all-cart">
+                <h3 class="text-center" style="background-image:linear-gradient(red,yellow);color:black;"><i>Cart</i></h3>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-8 round shadow-lg p-3 mb-5 addProduct-bgimg mt-3" id="productlist">
+        <h3 class="text-center" style="background-image:linear-gradient(red,yellow);color:black;"><i>Product List</i></h3>
+        <hr>
+            <div class="product-view row pl-2" id="product-list-view">
+            </div>
+         </div>
+        </div>
+    </div>
+
+
+<script>
+var sum=0;
+        function addproduct(){
+
+            let files = document.getElementById("Image").files;
+
+            if(files && files.length){
+
+                var filereader = new FileReader();
+
+                filereader.onload = function(){
+
+                    var product = document.createElement("div");product.style = "width:100%;height:20%;display:flex;width:100%; height:30%;"
+					
+					var image = document.createElement("img");image.style="height:150px;width:150px";
+                    var productName = document.createElement("h6");
+                    var productDescription = document.createElement("h6");
+                    var productQuantity = document.createElement("h6");
+                    var productPrice = document.createElement("h6");
+                    var button = document.createElement("button");
+					image.src = filereader.result;
+                    image.classList.add("img-thumbnail");
+                    image.className += " cart-img";
+					var div1=document.createElement("div");div1.appendChild(image);div1.style="width:30%";
+					var div2=document.createElement("div");div2.appendChild(productName);div2.appendChild(productDescription);div2.style="width:25%";
+					var div3 = document.createElement("div");div3.appendChild(productQuantity);div3.appendChild(productPrice);div3.style="width:25%";
+					var div4 = document.createElement("div");div4.appendChild(button);div4.style="width:20%";
+					
+                    
+					productName.innerHTML = "Name : " + document.getElementById("pName").value+"</br></br>";
+                    productDescription.innerHTML = "Description : " + document.getElementById("productDescription").value;
+                    productQuantity.innerHTML = "Available Quantity : " + document.getElementById("Quantity").value+"</br></br>";
+                    productPrice.innerHTML = "Price : Rs." + document.getElementById("Price").value;
+                    
+                    product.appendChild(div1);
+                    product.className += "rounded shadow-lg p-3 mb-5 addProduct-bgimg";
+                    product.appendChild(div2);
+					product.appendChild(div3);
+                    product.appendChild(div4);
+                    document.getElementById("product-list-view").appendChild(product);
+                    button.innerHTML = "Add to Cart"
+                    button.className += "add-cart btn btn-primary ";
+
+					document.getElementById("pName").value = "";
+                    document.getElementById("Quantity").value = "";
+                    document.getElementById("productDescription").value = "";
+                    document.getElementById("Price").value = "";
+                    document.getElementById("Image").value = ""; 
+
+                    var j=0;
+                    //Adding to cart
+                    btns = document.getElementsByClassName("add-cart");
+                    var ttl = document.createElement("span");
+					
+					for(var i = 0; i < btns.length; i++){
+ var cartView = document.getElementById("all-cart");
+
+							
+                        var btn = btns[i];
+                        btn.addEventListener("click",function(event){
+	                     
+							
+                           btnclick = event.target;
+                           
+                           var imgCart = btnclick.parentElement.parentElement.childNodes[0].childNodes[0].src;
+                           var cartName = btnclick.parentElement.parentElement.childNodes[1].childNodes[0].innerText;
+                           var spName = cartName.substr(7);
+                           cartName = spName;
+                       
+                           var Quantity = btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerText;
+                           var matches = Quantity.match(/(\d+)/);
+                           Quantity = matches[0];
+
+                           
+                           var price = btnclick.parentElement.parentElement.childNodes[2].childNodes[1].innerText;
+                           matches = price.match(/(\d+)/);
+                           price = matches[0];
+                           var cartQuan = prompt("Enter Quantity");
+						   if(cartQuan>Quantity){
+								alert("Product Quantity exceed...");
+								exit();
+						   }
+                           var cartTotal = price * cartQuan;
+                           sum=sum+cartTotal;
+						   ttl.innerText="Cart Total : "+sum;
+                           btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerHTML = "Available Quantity : " + (Quantity-cartQuan);
+
+                           var cartItem = document.createElement("div");
+                           var cartImgDiv = document.createElement("div");
+                           var cartTotalDiv = document.createElement("div");
+                           var cartRemoveDiv = document.createElement("div");
+                           var imgNameDiv = document.createElement("div");
+                           var imgDiv = document.createElement("div");
+                           var nameDiv = document.createElement("div");
+                           var total = document.createElement("span");
+                           var name = document.createElement("span");
+                           var removeBtn = document.createElement("button");
+                           var cartImg = document.createElement("img");
+                           var hr = document.createElement("hr");
+						   
+
+
+ 
+                           cartImg.src = imgCart;
+
+                           cartView.appendChild(cartItem);
+						   
+						   
+						  
+						   
+                           cartItem.className += "row border-bottom m-2";
+                           cartItem.appendChild(cartImgDiv);
+                           cartImgDiv.className = "col-md-6";
+                           
+                           cartImgDiv.appendChild(imgNameDiv);
+                           imgNameDiv.className += "row pb-1";
+                           imgNameDiv.appendChild(imgDiv);
+                           imgDiv.className += "col-md-6"
+                           imgDiv.appendChild(cartImg);
+                           cartImg.className += "fit_image";
+
+                           imgNameDiv.appendChild(nameDiv);
+                           nameDiv.className += "col-md-6";
+                           nameDiv.appendChild(name);
+						   nameDiv.appendChild(total);
+                           name.innerHTML = "Name : "+cartName+"</br>";
+							total.innerHTML = "Oty*Price=Rs." +cartTotal;
+                           cartItem.appendChild(cartTotalDiv);
+                           cartTotalDiv.className = "col-md-3";
+                          
+                           cartItem.appendChild(cartRemoveDiv);
+                           cartRemoveDiv.className = "col-md-3";
+                           cartRemoveDiv.appendChild(removeBtn);
+                           removeBtn.innerHTML = "Delete";
+                           removeBtn.className += "btn btn-danger remove-cart"
+
+                           cartItem.appendChild(hr);
+                                
+                           
+						   rembtns = document.getElementsByClassName("remove-cart");
+                            for(var i = 0; i < rembtns.length; i++){
+
+                            var rembtn = rembtns[i];
+                            rembtn.addEventListener("click",function(event){
+
+                            var rbtnclick = event.target;
+                            rbtnclick.parentElement.parentElement.remove();
+							
+                           btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerHTML = "Available Quantity : " + Quantity;
+							sum=sum-cartTotal;
+							ttl.innerText="Cart Total : "+sum;
+                            });
+						}cartView.appendChild(ttl); 
+                        });
+						
+						
+					}
+					
+				}
+                filereader.readAsDataURL(files[0]);
+             }     
+        }
+</script>
+</body>
+</html>
