@@ -62,7 +62,7 @@ background-image: url('blackBackground.png');
                     <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Product Quantity :</label>
-                        <input type="number" class="form-control" id="Quantity" placeholder="Enter Product Quantity">
+                        <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control" id="Quantity" placeholder="Enter Product Quantity">
                     </div>
                     <div class="form-group col-md-6">
                         <label>Product Price :</label>
@@ -73,9 +73,11 @@ background-image: url('blackBackground.png');
                     <button onclick="addproduct()" class="btn btn-primary" style="align:center">Add Product</button>
 					</center>
             </div>
-            <div class="round shadow-lg p-3 mb-5 addProduct-bgimg" id = "all-cart">
+            <div class="round shadow-lg p-3 mb-5 addProduct-bgimg">
                 <h3 class="text-center" style="background-image:linear-gradient(red,yellow);color:black;"><i>Cart</i></h3>
                 <hr>
+				<div id="all-cart"></div>
+				<div id="total-Cart"></div>
             </div>
         </div>
         <div class="col-md-8 round shadow-lg p-3 mb-5 addProduct-bgimg mt-3" id="productlist">
@@ -137,14 +139,13 @@ var sum=0;
                     document.getElementById("Price").value = "";
                     document.getElementById("Image").value = ""; 
 
-                    var j=0;
+                    
                     //Adding to cart
                     btns = document.getElementsByClassName("add-cart");
-                    var ttl = document.createElement("span");
+                    
 					
 					for(var i = 0; i < btns.length; i++){
- var cartView = document.getElementById("all-cart");
-
+ 
 							
                         var btn = btns[i];
                         btn.addEventListener("click",function(event){
@@ -158,21 +159,24 @@ var sum=0;
                            cartName = spName;
                        
                            var Quantity = btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerText;
-                           var matches = Quantity.match(/(\d+)/);
+                           var qty=Quantity;
+						   var matches = Quantity.match(/(\d+)/);
                            Quantity = matches[0];
 
                            
                            var price = btnclick.parentElement.parentElement.childNodes[2].childNodes[1].innerText;
                            matches = price.match(/(\d+)/);
                            price = matches[0];
-                           var cartQuan = prompt("Enter Quantity");
-						   if(cartQuan>Quantity){
+                           
+						   var cartQuan = prompt("Enter Quantity");
+						   if(cartQuan>qty){
 								alert("Product Quantity exceed...");
 								exit();
 						   }
-                           var cartTotal = price * cartQuan;
+                           
+						   var cartTotal = price * cartQuan;
                            sum=sum+cartTotal;
-						   ttl.innerText="Cart Total : "+sum;
+						   document.getElementById("total-Cart").innerText="Cart Total : "+sum;
                            btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerHTML = "Available Quantity : " + (Quantity-cartQuan);
 
                            var cartItem = document.createElement("div");
@@ -187,18 +191,11 @@ var sum=0;
                            var removeBtn = document.createElement("button");
                            var cartImg = document.createElement("img");
                            var hr = document.createElement("hr");
-						   
-
-
- 
-                           cartImg.src = imgCart;
-
-                           cartView.appendChild(cartItem);
-						   
-						   
-						  
-						   
-                           cartItem.className += "row border-bottom m-2";
+							
+							var cartView = document.getElementById("all-cart");
+							cartImg.src = imgCart;
+							cartView.appendChild(cartItem);
+						   cartItem.className += "row border-bottom m-2";
                            cartItem.appendChild(cartImgDiv);
                            cartImgDiv.className = "col-md-6";
                            
@@ -214,7 +211,7 @@ var sum=0;
                            nameDiv.appendChild(name);
 						   nameDiv.appendChild(total);
                            name.innerHTML = "Name : "+cartName+"</br>";
-							total.innerHTML = "Oty*Price=Rs." +cartTotal;
+							total.innerHTML = "Oty * Price = Rs. " +cartTotal;
                            cartItem.appendChild(cartTotalDiv);
                            cartTotalDiv.className = "col-md-3";
                           
@@ -225,9 +222,8 @@ var sum=0;
                            removeBtn.className += "btn btn-danger remove-cart"
 
                            cartItem.appendChild(hr);
-                                
-                           
-						   rembtns = document.getElementsByClassName("remove-cart");
+                          
+						  rembtns = document.getElementsByClassName("remove-cart");
                             for(var i = 0; i < rembtns.length; i++){
 
                             var rembtn = rembtns[i];
@@ -238,9 +234,9 @@ var sum=0;
 							
                            btnclick.parentElement.parentElement.childNodes[2].childNodes[0].innerHTML = "Available Quantity : " + Quantity;
 							sum=sum-cartTotal;
-							ttl.innerText="Cart Total : "+sum;
+							document.getElementById("total-Cart").innerText="Cart Total : "+sum;
                             });
-						}cartView.appendChild(ttl); 
+						} 
                         });
 						
 						
