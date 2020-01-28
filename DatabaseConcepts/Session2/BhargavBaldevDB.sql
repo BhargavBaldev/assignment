@@ -1,5 +1,5 @@
 -- //to create table individual
-CREATE TABLE Individual (IndividualId int,FirstName Varchar(255),LastName Varchar(255),UserName Char(10));
+CREATE TABLE Individual (IndividualId int unique,FirstName Varchar(255),LastName Varchar(255),UserName Char(10));
 
 -- // to insert data into individual
 INSERT INTO Individual VALUES ( 6, 'Benny', 'Hill', 'hillbenny' );
@@ -16,7 +16,7 @@ UPDATE Individual SET UserName = 'funnyman' WHERE IndividualId = 6;
 SELECT DISTINCT(FirstName) FROM Individual;
 
 -- //to create table publisher
-CREATE TABLE Publisher (IndividualId int, Company Varchar(255));
+CREATE TABLE Publisher (IndividualId int unique, Company Varchar(255));
 
 -- //to insert data into publisher table
 INSERT INTO Publisher VALUES ( 6, 2000 );
@@ -42,3 +42,22 @@ DELIMITER ;
 
 -- //to call a stored  procedure with user input
 CALL `bhargavbaldevdb`.`demo`(6);
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `error_handler`(ID INTEGER,company varchar(50))
+BEGIN 
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SELECT 'Error occured';
+ INSERT INTO bhargavbaldevdb.publisher VALUES (ID,company);    
+ SELECT *FROM publisher;
+END$$
+DELIMITER ;
+CALL `bhargavbaldevdb`.`error_handler`(1,'skjdfks');
+
+
+SELECT CONCAT(
+     '[',
+     GROUP_CONCAT(JSON_OBJECT('Id', individualId, 'FirstName', FirstName, 'LastName',LastName,'UserName',UserName)),
+     ']'
+ )
+ FROM individual;
