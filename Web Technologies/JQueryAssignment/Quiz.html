@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html>
-<head>
-<script type='text/javascript' src='http://code.jquery.com/jquery.min.js'>
-</head>
+<title>Quiz Time</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 body{
 text-align:center;
@@ -10,19 +13,24 @@ font-size:50px;
 font-weight:bold;
 }
 .screen{
+position:fixed;
 border:5px solid black;
 height:100%;
 width:100%;
 }
 .content{
-margin:15% 25% 40% 25%;
+margin-top:12%;
+margin-left:28%;
 width:40%;
 height:50%;
+}
+.div{
+border:2px solid red;
 }
 .btn{
 font-weight:bold;
 border-radius:10px;
-font-size:40px;
+font-size:30px;
 height:50px;
 width:200px;
 background-color:red;
@@ -30,11 +38,147 @@ color:white;
 }
 </style>
 <body>
-<div class="screen">
+  <div class="screen">
 <div class="content">
-<span>Quiz Time</span></br></br>
-<button class="btn">Start -></button>
+<div id="quiz-time">
+<h1>Quiz Time</h1></br>
+<button class="btn" id="btnStart" onclick="start()">Start -></button>
+</div>
+  	
+
+  	<div id="quiz">
+  		<div id="div1">1+1=?<br/><div class="div">
+		<input type="radio" name="q1" value="1" /> 1<br/>
+		<input type="radio" name="q1" value="2" /> 2<br/>
+		<input type="radio" name="q1" value="3" /> 3<br/>
+		<input type="radio" name="q1" value="4" /> 4<br/>
+		</div></div>
+
+		<div id="div2">2+2=?<br/><div class="div">
+		<input type="radio" name="q2" value="3" /> 3<br/>
+		<input type="radio" name="q2" value="4" /> 4<br/>
+		<input type="radio" name="q2" value="5" /> 5<br/>
+		<input type="radio" name="q2" value="6" /> 6<br/>
+		</div></div>
+
+		<div id="div3">3+3=?<br/><div class="div">
+		<input type="radio" name="q3" value="4" /> 4<br/>
+		<input type="radio" name="q3" value="5" /> 5<br/>
+		<input type="radio" name="q3" value="6" /> 6<br/>
+		<input type="radio" name="q3" value="7" /> 7<br/>
+		</div></div>
+
+		<div id="div4">4+4=?<br/><div class="div">
+		<input type="radio" name="q4" value="5" /> 5<br/>
+		<input type="radio" name="q4" value="6" /> 6<br/>
+		<input type="radio" name="q4" value="7" /> 7<br/>
+		<input type="radio" name="q4" value="8" /> 8<br/>
+		</div></div>
+
+		<div id="div5">5+5=?<br/><div class="div">
+		<input type="radio" name="q5" value="10" /> 10<br/>
+		<input type="radio" name="q5" value="11" /> 11<br/>
+		<input type="radio" name="q5" value="12" /> 12<br/>
+		<input type="radio" name="q5" value="13" /> 13<br/>
+		</div></div>
+
+		<div id="result"></div><br/><br/>
+
+
+		<button class="btn" id="next">Next</button>
+		<button class="btn" id="again">Start again</button>
+  		</div>
+  </div>
 </div>
 </div>
+
+
+<script>
+
+function start(){
+
+}
+</script>
+
+<script>
+		$(document).ready(function(){
+			var marke=0;
+			$("#div2").hide();
+			$("#div3").hide();
+			$("#div4").hide();
+			$("#div5").hide();
+			$("#again").hide();
+			$("#next").click(function(){
+				if($("#div1").is(":visible")){
+					if($("input[name='q1']:checked").val()!=null){
+						if($("input[name='q1']:checked").val()==2){
+							marke++;
+						}
+						$("#div1").hide();
+						$("#div2").show();
+					}else{
+						alert("You have not selected any option!!!")
+					}
+				}else if($("#div2").is(":visible")){
+					if($("input[name='q2']:checked").val()!=null){
+						if($("input[name='q2']:checked").val()==4){
+							marke++;
+						}
+						$("#div2").hide();
+						$("#div3").show();
+					}else{
+						alert("You have not selected any option!!!")
+					}
+
+				}else if($("#div3").is(":visible")){
+					if($("input[name='q3']:checked").val()!=null){
+						if($("input[name='q3']:checked").val()==6){
+							marke++;
+						}
+						$("#div3").hide();
+						$("#div4").show();
+					}else{
+						alert("You have not selected any option!!!")
+					}
+
+				}else if($("#div4").is(":visible")){
+					if($("input[name='q4']:checked").val()!=null){
+						if($("input[name='q4']:checked").val()==8){
+							marke++;
+						}
+						$("#div4").hide();
+						$("#div5").show();
+					}else{
+						alert("You have not selected any option!!!")
+					}
+
+				}else if($("#div5").is(":visible")){
+					if($("input[name='q5']:checked").val()!=null){
+						if($("input[name='q5']:checked").val()==10){
+							marke++;
+						}
+						$("#div5").hide();
+						$("#next").hide();
+						$("#result").html("Result="+marke+"/5");
+						$("#again").show();
+					}else{
+						alert("You have not selected any option!!!")
+					}
+
+				}
+			});
+			$("#again").click(function(){
+				location.reload(true);
+			});
+		});
+		$(document).ready(function(){
+			$("#quiz").hide();
+			$("#btnStart").click(function(){
+				$("#quiz-time").hide();
+				$("#quiz").show();
+			});
+		});
+	</script>
+
 </body>
 </html>
