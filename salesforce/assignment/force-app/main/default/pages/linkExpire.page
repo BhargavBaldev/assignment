@@ -1,0 +1,9 @@
+<apex:page >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <h1>this survey link has been expired</h1>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

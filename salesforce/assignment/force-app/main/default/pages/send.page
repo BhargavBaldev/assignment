@@ -1,0 +1,13 @@
+<apex:page controller="surveyController">
+    <apex:form >
+        <apex:pageBlock title="Survey Form">
+          <apex:pageBlockSection >
+            <apex:repeat value="{!survey}" var="qt">
+                {! qt.Question}<br/><br/><br/>
+                <apex:inputText value="{! qt.Response}"/>
+            </apex:repeat>
+            <apex:commandButton value="Submit" action="{!saveResponse}"/>
+            </apex:pageBlockSection>
+            </apex:pageBlock>
+    </apex:form>
+</apex:page>

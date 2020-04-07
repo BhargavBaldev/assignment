@@ -1,0 +1,9 @@
+<apex:page >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <h1>this survey has been already completed</h1>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
