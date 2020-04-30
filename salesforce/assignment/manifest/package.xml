@@ -8,6 +8,11 @@
         <members>*</members>
         <name>ApexComponent</name>
     </types>
+     <types>
+        <members>*</members>
+        <name>CustomObject</name>
+    </types>
+    
     <types>
         <members>*</members>
         <name>ApexPage</name>

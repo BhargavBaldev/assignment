@@ -1,0 +1,26 @@
+<template> 
+    
+  <template if:true={flag1} for:each={question} for:item="que" >
+    <lightning-input type="text" key={que.Id}  value={que.Name} onmouseover={handleInput}>
+    </lightning-input><br key={que.Id}/>
+    <lightning-radio-group key={que.Id}  options={options} value={value} onchange={handleChange} required>
+    </lightning-radio-group>
+  </template>
+
+  
+    <lightning-button if:true={flag1}  variant="brand" label="Save" title="Save" icon-name="utility:save" onclick={showMSG} class="slds-m-left_medium">
+    </lightning-button> 
+     
+  
+
+  <template if:true={flag} >
+    
+  <lightning-card title={label.thankYou}>
+    
+  </lightning-card>
+  
+  </template>
+  <template if:true={surveyCompleted}>
+    <lightning-card title={label.surveyCompleted}></lightning-card>
+  </template>
+</template>

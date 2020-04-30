@@ -8,6 +8,7 @@ public class surveyController {
     
     public Integer response { get; set; }
     
+    
     public list<wrapper> getSurvey() {
         String res;
         results =[select ID,name from survey_question__c];
@@ -28,6 +29,7 @@ public class surveyController {
         }
     }
     
+     
     public PageReference saveResponse() {
         Id id=ApexPages.currentPage().getParameters().get('id');
         updateCase = [select status from Case where id=:id];
@@ -44,7 +46,7 @@ public class surveyController {
         }else{
             list<survey_response__c> repResult = new list<survey_response__c>();
             for(Integer i=0;i < results.size(); i++){
-                survey_response__c rs = new survey_response__c(name=survey[i].Response,response_date__c=system.today(),survey_question__c=survey[i].id,case__c=id);
+                survey_response__c rs = new survey_response__c(name=survey[i].Response,survey_question__c=survey[i].id,response_date__c=system.today(),case__c=id);
                 repResult.add(rs);
             }
             insert repResult;

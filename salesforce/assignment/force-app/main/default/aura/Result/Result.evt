@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION">
+     <aura:attribute name="Pass_from" type="sObject" access="GLOBAL"/>
+     <aura:attribute name="Pass_to" type="sObject" access="GLOBAL"/>
+    </aura:event>

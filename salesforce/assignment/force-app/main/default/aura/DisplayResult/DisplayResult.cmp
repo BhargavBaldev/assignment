@@ -1,0 +1,26 @@
+<aura:component controller="DisplayResultController" access="GLOBAL">
+	<aura:attribute name="from_billingstreet" type="String" />
+    <aura:attribute name="from_billingcity" type="String" />
+    <aura:attribute name="from_billingstate" type="String" />
+    <aura:attribute name="from_billingcountry" type="String" />
+    <aura:attribute name="from_billinglongitude" type="Double" />
+    <aura:attribute name="from_billinglatitude" type="Double" />
+    <aura:attribute name="to_billingstreet" type="String" />
+    <aura:attribute name="to_billingstate" type="String" />
+    <aura:attribute name="to_billingcity" type="String" />
+    <aura:attribute name="to_billingcountry" type="String" />
+     <aura:attribute name="to_billinglongitude" type="Double" />
+    <aura:attribute name="to_billinglatitude" type="Double" />
+    
+    <aura:handler event="c:Result" action="{!c.getValueFromApplicationEvent}"/>
+    
+    <br/>Output:<br/>
+   
+    <br/><b>From Account Billing Address:</b><br/>{!v.from_billingstreet}{!v.from_billingcity}{!v.from_billingstate}{!v.from_billingcountry}<br/>
+    
+    <br/><b>To Account Billing Address:</b><br/>{!v.to_billingstreet}{!v.to_billingcity}{!v.to_billingstate}{!v.to_billingcountry}<br/>
+    
+    <aura:attribute name="account" type="Account" default="{ 'sobjectType': 'Account' }"/>
+    <br/>Select Distance Metrics:<force:inputField value="{!v.account.Distance_Metrics__c}" change="{!c.onPicklistChange}"/>
+    <aura:attribute name="distance" type="Double" default=""/><br/><b>Distance:</b>{!v.distance}<b>{!v.account.Distance_Metrics__c}</b>
+</aura:component>
