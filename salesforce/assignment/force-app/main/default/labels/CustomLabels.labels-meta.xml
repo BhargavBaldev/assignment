@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>survey_completed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>survey completed</shortDescription>
+        <value>This survey has been already completed</value>
+    </labels>
+    <labels>
         <fullName>thank_you</fullName>
         <language>en_US</language>
         <protected>true</protected>
