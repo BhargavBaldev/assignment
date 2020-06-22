@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Profiles__c</fullName>
+    <externalId>false</externalId>
+    <label>Profiles</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Analytics Cloud Integration User</fullName>
+                <default>false</default>
+                <label>Analytics Cloud Integration User</label>
+            </value>
+            <value>
+                <fullName>Analytics Cloud Security User</fullName>
+                <default>false</default>
+                <label>Analytics Cloud Security User</label>
+            </value>
+            <value>
+                <fullName>Authenticated Website</fullName>
+                <default>false</default>
+                <label>Authenticated Website</label>
+            </value>
+            <value>
+                <fullName>call center Profile</fullName>
+                <default>false</default>
+                <label>call center Profile</label>
+            </value>
+            <value>
+                <fullName>Chatter External User</fullName>
+                <default>false</default>
+                <label>Chatter External User</label>
+            </value>
+            <value>
+                <fullName>Chatter Free User</fullName>
+                <default>false</default>
+                <label>Chatter Free User</label>
+            </value>
+            <value>
+                <fullName>Chatter Moderator User</fullName>
+                <default>false</default>
+                <label>Chatter Moderator User</label>
+            </value>
+            <value>
+                <fullName>Cleaner</fullName>
+                <default>false</default>
+                <label>Cleaner</label>
+            </value>
+            <value>
+                <fullName>Contract Manager</fullName>
+                <default>false</default>
+                <label>Contract Manager</label>
+            </value>
+            <value>
+                <fullName>Cross Org Data Proxy User</fullName>
+                <default>false</default>
+                <label>Cross Org Data Proxy User</label>
+            </value>
+            <value>
+                <fullName>Custom: Marketing Profile</fullName>
+                <default>false</default>
+                <label>Custom: Marketing Profile</label>
+            </value>
+            <value>
+                <fullName>Custom: Sales Profile</fullName>
+                <default>false</default>
+                <label>Custom: Sales Profile</label>
+            </value>
+            <value>
+                <fullName>Custom: Support Profile</fullName>
+                <default>false</default>
+                <label>Custom: Support Profile</label>
+            </value>
+            <value>
+                <fullName>Customer Community Login User</fullName>
+                <default>false</default>
+                <label>Customer Community Login User</label>
+            </value>
+            <value>
+                <fullName>Customer Community Plus Login User</fullName>
+                <default>false</default>
+                <label>Customer Community Plus Login User</label>
+            </value>
+            <value>
+                <fullName>Customer Community Plus User</fullName>
+                <default>false</default>
+                <label>Customer Community Plus User</label>
+            </value>
+            <value>
+                <fullName>Customer Community User</fullName>
+                <default>false</default>
+                <label>Customer Community User</label>
+            </value>
+            <value>
+                <fullName>Customer Portal Manager Custom</fullName>
+                <default>false</default>
+                <label>Customer Portal Manager Custom</label>
+            </value>
+            <value>
+                <fullName>Customer Portal Manager Standard</fullName>
+                <default>false</default>
+                <label>Customer Portal Manager Standard</label>
+            </value>
+            <value>
+                <fullName>External Identity User</fullName>
+                <default>false</default>
+                <label>External Identity User</label>
+            </value>
+            <value>
+                <fullName>Force.com - App Subscription User</fullName>
+                <default>false</default>
+                <label>Force.com - App Subscription User</label>
+            </value>
+            <value>
+                <fullName>Force.com - Free User</fullName>
+                <default>false</default>
+                <label>Force.com - Free User</label>
+            </value>
+            <value>
+                <fullName>Gold Partner User</fullName>
+                <default>false</default>
+                <label>Gold Partner User</label>
+            </value>
+            <value>
+                <fullName>High Volume Customer Portal</fullName>
+                <default>false</default>
+                <label>High Volume Customer Portal</label>
+            </value>
+            <value>
+                <fullName>High Volume Customer Portal User</fullName>
+                <default>false</default>
+                <label>High Volume Customer Portal User</label>
+            </value>
+            <value>
+                <fullName>Identity User</fullName>
+                <default>false</default>
+                <label>Identity User</label>
+            </value>
+            <value>
+                <fullName>Marketing User</fullName>
+                <default>false</default>
+                <label>Marketing User</label>
+            </value>
+            <value>
+                <fullName>Partner App Subscription User</fullName>
+                <default>false</default>
+                <label>Partner App Subscription User</label>
+            </value>
+            <value>
+                <fullName>Partner Community Login User</fullName>
+                <default>false</default>
+                <label>Partner Community Login User</label>
+            </value>
+            <value>
+                <fullName>Partner Community User</fullName>
+                <default>false</default>
+                <label>Partner Community User</label>
+            </value>
+            <value>
+                <fullName>Read Only</fullName>
+                <default>false</default>
+                <label>Read Only</label>
+            </value>
+            <value>
+                <fullName>Sales</fullName>
+                <default>false</default>
+                <label>Sales</label>
+            </value>
+            <value>
+                <fullName>Silver Partner User</fullName>
+                <default>false</default>
+                <label>Silver Partner User</label>
+            </value>
+            <value>
+                <fullName>Solution Manager</fullName>
+                <default>false</default>
+                <label>Solution Manager</label>
+            </value>
+            <value>
+                <fullName>Standard Guest</fullName>
+                <default>false</default>
+                <label>Standard Guest</label>
+            </value>
+            <value>
+                <fullName>Standard Platform User</fullName>
+                <default>false</default>
+                <label>Standard Platform User</label>
+            </value>
+            <value>
+                <fullName>Standard User</fullName>
+                <default>false</default>
+                <label>Standard User</label>
+            </value>
+            <value>
+                <fullName>survey Profile</fullName>
+                <default>false</default>
+                <label>survey Profile</label>
+            </value>
+            <value>
+                <fullName>System Administrator</fullName>
+                <default>false</default>
+                <label>System Administrator</label>
+            </value>
+            <value>
+                <fullName>Work.com Only User</fullName>
+                <default>false</default>
+                <label>Work.com Only User</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

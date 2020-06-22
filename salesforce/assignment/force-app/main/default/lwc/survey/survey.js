@@ -1,53 +1,63 @@
-import { LightningElement , track ,wire,api } from 'lwc';
+import { LightningElement , track ,api } from 'lwc';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 import survey_response__c_OBJECT from '@salesforce/schema/survey_response__c';
 import Name_FIELD from '@salesforce/apex/surveyLWC.saveResponse';
 import getQuestion from '@salesforce/apex/surveyLWC.getQuestion';
-import thankYou from '@salesforce/label/c.thank_you';
-import surveyCompleted from '@salesforce/label/c.survey_completed';
 import setStatus from '@salesforce/apex/surveyLWC.setStatus';
 import getStatus from '@salesforce/apex/surveyLWC.getStatus';
+import getLabelTranslator from '@salesforce/apex/LabelTranslator_Controller.getLabelTranslator';
 
 export default class Survey extends LightningElement {
     @api recordId;
     @track question;
-    @track status='';
+    @track status;
     @track flag1 = true;
     @track flag = false;
     @track surveyCompleted=false;
-    
+    @track label ;
+
     showMSG(){
        
         getStatus({
             id:this.paramValue
         }).then(result=>{
             this.status=result;
-            console.log(this.status);
+            
         })
-        console.log(this.status);
-        if (this.status=='Cancelled') {
+      
+        this.surveyMSG();
+        
+        
+    }
+    
+    surveyMSG(){
+        if (this.status[0]=='Cancelled') {
             console.log('from cancel');
+           getLabelTranslator({label:'thank_you', language:this.status[1]})
+            .then(result => {
+                this.label = result;
+                console.log(this.label);
+            })
+            setStatus({
+                status:'New',
+                id:this.paramValue
+            })
            this.flag=true;
            this.flag1=false;
             
         }else{
             console.log('from new');
+            getLabelTranslator({label:'survey_completed', language:this.status[1]})
+            .then(result => {
+                this.label = result;
+                console.log(this.label);
+            })
             this.surveyCompleted=true;
             this.flag1=false;
             
         }
-        setStatus({
-            status:'New',
-            id:this.paramValue
-        })
         
     }
-    
-    
-
-    label = {thankYou,
-    surveyCompleted}
-   
-    
     
     @track
     options = [
@@ -63,21 +73,33 @@ export default class Survey extends LightningElement {
     @track
     selectedOption =survey_response__c_OBJECT;
 
-    
-
-   handleInput(event){
+    handleInput(event){
        this.selectedOption.survey_question__c=event.target.value;
-       
-   }
+    }
+   
    @track paramValue  
+   @track first
+   @track last
    connectedCallback() {
     const param = 'id';
+    const firstname = 'Firstname';
+    const lastname = 'Lastname';
+    this.first=this.getUrlParamValue(window.location.href, firstname);
+    this.last=this.getUrlParamValue(window.location.href, lastname);
     this.paramValue = this.getUrlParamValue(window.location.href, param);
+
+    const evt = new ShowToastEvent({
+        title: 'Welcome',
+        message: this.first + this.last,
+        variant: 'success',
+        mode: 'dismissable'
+    });
+    this.dispatchEvent(evt);
+
     getQuestion({
         id:this.paramValue
     }).then(result=>{    
-       
-        this.question=result;
+       this.question=result;
     })   
     }
 

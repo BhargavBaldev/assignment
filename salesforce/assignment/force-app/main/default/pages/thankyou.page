@@ -1,0 +1,3 @@
+<apex:page showHeader="false" sidebar="false" controller="LabelTranslator_Controller" language="{!language}" standardStylesheets="false" contentType="application/json">
+    {!$Label[label]}
+</apex:page>

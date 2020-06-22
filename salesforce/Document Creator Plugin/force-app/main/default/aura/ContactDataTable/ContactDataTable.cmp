@@ -1,0 +1,77 @@
+<aura:component controller="ContactRecordListApex" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+   
+    
+    <aura:attribute name="profile" type="boolean" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="pickl" type="List" />
+	<aura:attribute name="selectedObject" type="String" />
+    <aura:attribute name="selectedField" type="List" />
+    <aura:attribute name="Field" type="String" default=""/>
+    <aura:attribute name="result" type="List" />
+     <aura:attribute name="Record" type="String"/>
+    <aura:attribute name="selectedRecord" type="List" />
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+     <aura:if isTrue="{!v.profile}">
+    <div class="slds--sizing slds-grid slds-wrap" style="background-color: lightgrey">
+    <div class = "slds-size--1-of-3">
+    	<lightning:select aura:id="selectObject" label="Select Object" name="object" onchange="{!c.doSearch}" value="{!v.selectedObject}">
+            <option value="" text="- None -" />
+            <aura:iteration items="{!v.pickl}" var="per">
+            	<option value="{!per}" text="{!per}" />  
+        	</aura:iteration>
+        </lightning:select>
+    </div>
+    <div class = "slds-size--1-of-3">
+        <lightning:select aura:id="selectField" label="Select Field" name="field" onchange="{!c.doSearch}" value="{!v.Field}">
+            <option value="" text="- None -" />
+            <aura:iteration items="{!v.selectedField}" var="data">
+            	<option value="{!data}" text="{!data}" />  
+        	</aura:iteration>
+        </lightning:select>
+    </div>
+    <div class = "slds-size--1-of-3">
+        <lightning:select aura:id="selectRecord" label="Select Record" name="record" onchange="{!c.doSearch}" value="{!v.Record}">
+            <option value="" text="- None -" />
+            <aura:iteration items="{!v.selectedRecord}" var="dat">
+            	<option value="{!dat}" text="{!dat}" />  
+        	</aura:iteration>
+        </lightning:select>
+    </div>
+    </div>
+         <div>
+             <aura:if isTrue="{!v.selectedObject=='Account'}">
+         <lightning:select aura:id="tempType" name="tempType" label="Select Template Type" required="true">
+        <option value="">choose one...</option>
+        <option value="Type 1">Type 1</option>
+        <option value="Type 2">Type 2</option>
+        <option value="Type 3">Type 3</option>
+    </lightning:select>
+             </aura:if>
+         </div>
+    <aura:if isTrue="{!and(and(not(empty(v.selectedObject)),not(empty(v.Field))),not(empty(v.Record)))}">
+        <div style="text-align:center;background-color: lightgrey;font-size:30px"><u>{!v.selectedObject} Summary </u></div>
+        <aura:iteration items="{!v.result}" var="result">
+            <div class="slds--sizing slds-grid slds-wrap" style="background-color: white">
+            <div class = "slds-size--3-of-8">
+            <option value="{!result.label}" text="{!result.label}"/>
+            </div>
+            <div class = "slds-size--1-of-8">
+                :
+            </div>
+            <div class = "slds-size--4-of-8">
+                <option value="{!result.value}" text="{!result.value}" />
+            </div>
+            </div>
+         </aura:iteration>
+    <lightning:button label="Save" onclick="{!c.downloadDocument}" />
+    </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.profile==false}">
+    <c:alertMsg></c:alertMsg>
+    </aura:if>
+</aura:component>

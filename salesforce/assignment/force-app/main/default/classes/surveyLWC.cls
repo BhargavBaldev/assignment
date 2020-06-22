@@ -5,7 +5,7 @@ public with sharing class surveyLWC {
     public static List<sObject> getQuestion(String id){
      System.debug(id);
         Case que_type=[select Language__c from Case where id=:id];
-        if(que_type.Language__c=='French'){
+        if(que_type.Language__c=='fr'){
           
             return Database.query('select id,name from survey_fquestion__c');
             
@@ -15,12 +15,16 @@ public with sharing class surveyLWC {
         
     }
     @AuraEnabled
-    public static String getStatus(String id){
-        System.debug(id);
-        List<Case> c = [select Status from Case where id=:id];
+    public static List<String> getStatus(String id){
+       
+        List<String> ca = new List<String>();
+        List<Case> c = [select Status,Language__c from Case where id=:id];
         String status = c[0].Status;
-        System.debug(status);
-        return status;
+        string lang = c[0].Language__c;
+        ca.add(status);
+        ca.add(lang);
+        
+        return ca;
     }
     @AuraEnabled
     public static void saveResponse(survey_response__c con,String id){
@@ -43,4 +47,6 @@ public with sharing class surveyLWC {
         st.Status=status;
         update st;
     }
+    
+    
 }
